@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PhoneCall, Mail, MapPin, Send, Clock, Users, CheckCircle } from 'lucide-react';
+import { PhoneCall, Mail, MapPin, Send, Clock, Users, CheckCircle, Shield, Server, HelpCircle, Key, UserCog } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -45,10 +45,10 @@ const Contact = () => {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-100 to-yellow-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
       {/* Header Section */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-r from-yellow-300  to-orange-300 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <section className="relative py-16 md:py-24 bg-gradient-to-r from-brand-blue to-brand-red overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute inset-0">
           <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-32 h-32 bg-white/5 rounded-full animate-pulse delay-1000"></div>
@@ -57,47 +57,45 @@ const Contact = () => {
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black leading-tight">
-              Contact Us
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
+              Admin Support
             </h1>
-            <p className="text-xl md:text-2xl text-orange-100 leading-relaxed">
-              Get in touch with SCR Agro Farms for orders, inquiries, or farm visits.
+            <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
+              Get technical support and assistance for SCR Admin management system
             </p>
           </div>
         </div>
       </section>
 
-     
- {/* Contact Information */}
+      {/* Contact Information */}
       <section className="py-12 md:py-20 -mt-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-      {/* Contact Information */}
-  
+            {/* Contact Information */}
             <div className="lg:col-span-1 space-y-6">
               <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800 border-b border-gray-200 pb-4">
-                  Reach Out To Us
+                  Technical Support
                 </h2>
                 
                 <div className="space-y-6">
-                  <div className="group bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg">
+                  <div className="group bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200 hover:border-blue-400 transition-all duration-300 hover:shadow-lg">
                     <div className="flex items-start">
-                      <div className="bg-green-500 p-3 rounded-full group-hover:bg-green-600 transition-colors duration-300">
+                      <div className="bg-blue-500 p-3 rounded-full group-hover:bg-blue-600 transition-colors duration-300">
                         <PhoneCall className="h-6 w-6 text-white" />
                       </div>
                       <div className="ml-4 flex-1">
-                        <h3 className="font-bold text-lg mb-3 text-gray-800">Phone</h3>
+                        <h3 className="font-bold text-lg mb-3 text-gray-800">Admin Support</h3>
                         <div className="space-y-3">
                           <div>
-                            <p className="text-gray-600 mb-1">Mrs. Sarika Reddy</p>
-                            <a href="tel:+919868220018" className="font-bold text-green-600 hover:text-green-700 transition-colors duration-200 text-lg">
+                            <p className="text-gray-600 mb-1">Technical Support</p>
+                            <a href="tel:+919868220018" className="font-bold text-blue-600 hover:text-blue-700 transition-colors duration-200 text-lg">
                               +91 9868220018
                             </a>
                           </div>
                           <div>
-                            <p className="text-gray-600 mb-1">S. Chandrasheker Reddy</p>
-                            <a href="tel:+919701039748" className="font-bold text-green-600 hover:text-green-700 transition-colors duration-200 text-lg">
+                            <p className="text-gray-600 mb-1">System Administrator</p>
+                            <a href="tel:+919701039748" className="font-bold text-blue-600 hover:text-blue-700 transition-colors duration-200 text-lg">
                               +91 9701039748
                             </a>
                           </div>
@@ -106,53 +104,56 @@ const Contact = () => {
                     </div>
                   </div>
                   
-                  <div className="group bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200 hover:border-blue-400 transition-all duration-300 hover:shadow-lg">
+                  <div className="group bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-200 hover:border-indigo-400 transition-all duration-300 hover:shadow-lg">
                     <div className="flex items-start">
-                      <div className="bg-blue-500 p-3 rounded-full group-hover:bg-blue-600 transition-colors duration-300">
+                      <div className="bg-indigo-500 p-3 rounded-full group-hover:bg-indigo-600 transition-colors duration-300">
                         <Mail className="h-6 w-6 text-white" />
                       </div>
                       <div className="ml-4 flex-1">
-                        <h3 className="font-bold text-lg mb-3 text-gray-800">Email</h3>
-                        <a href="mailto:scragro79@gmail.com" className="font-bold text-blue-600 hover:text-blue-700 transition-colors duration-200 text-lg block mb-2">
+                        <h3 className="font-bold text-lg mb-3 text-gray-800">Email Support</h3>
+                        <a href="mailto:scragro79@gmail.com" className="font-bold text-indigo-600 hover:text-indigo-700 transition-colors duration-200 text-lg block mb-2">
                           scragro79@gmail.com
                         </a>
-                        <p className="text-sm text-gray-600">We'll respond within 24 hours</p>
+                        <p className="text-sm text-gray-600">Technical support & system issues</p>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="group bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-200 hover:border-indigo-400 transition-all duration-300 hover:shadow-lg">
+                  <div className="group bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200 hover:border-purple-400 transition-all duration-300 hover:shadow-lg">
                     <div className="flex items-start">
-                      <div className="bg-indigo-500 p-3 rounded-full group-hover:bg-indigo-600 transition-colors duration-300">
+                      <div className="bg-purple-500 p-3 rounded-full group-hover:bg-purple-600 transition-colors duration-300">
                         <MapPin className="h-6 w-6 text-white" />
                       </div>
                       <div className="ml-4 flex-1">
-                        <h3 className="font-bold text-lg mb-3 text-gray-800">Address</h3>
-                        <p className="text-gray-700 mb-3 leading-relaxed">SCR Agrofarms, NH-40, Gyrampalli, Annamaya Dist, AP-517213</p>
-                        <a 
-                          href="https://photos.app.goo.gl/HTgcZq32qB4sE9rM6" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium transition-colors duration-200"
+                        <h3 className="font-bold text-lg mb-3 text-gray-800">System Status</h3>
+                        <div className="flex items-center mb-2">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                          <span className="text-green-600 font-medium">All Systems Operational</span>
+                        </div>
+                        <p className="text-sm text-gray-600 mb-3">SCR Admin v1.0</p>
+                        <Link 
+                          to="/system-status" 
+                          className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors duration-200"
                         >
-                          View on Google Maps
+                          View Detailed Status
                           <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="mt-8 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl p-6 shadow-lg">
+                <div className="mt-8 bg-gradient-to-r from-brand-blue to-brand-red text-white rounded-xl p-6 shadow-lg">
                   <div className="flex items-center mb-4">
                     <Clock className="h-6 w-6 mr-3" />
-                    <h3 className="font-bold text-lg">Business Hours</h3>
+                    <h3 className="font-bold text-lg">Support Hours</h3>
                   </div>
-                  <div className="space-y-2 text-green-100">
+                  <div className="space-y-2 text-blue-100">
                     <p>Monday - Saturday: 8am - 8pm</p>
                     <p>Sunday: 9am - 6pm</p>
+                    <p className="text-sm mt-2">Emergency support available for critical system issues</p>
                   </div>
                 </div>
               </div>
@@ -162,7 +163,7 @@ const Contact = () => {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-500">
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800 border-b border-gray-200 pb-4">
-                  Send Us a Message
+                  Technical Support Request
                 </h2>
                 
                 {isSubmitted ? (
@@ -170,8 +171,8 @@ const Contact = () => {
                     <div className="bg-green-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
                       <CheckCircle className="h-10 w-10 text-green-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-green-600 mb-4">Message Sent!</h3>
-                    <p className="text-gray-600">We've received your message and will get back to you soon.</p>
+                    <h3 className="text-2xl font-bold text-green-600 mb-4">Support Request Sent!</h3>
+                    <p className="text-gray-600">We've received your support request and will get back to you soon.</p>
                   </div>
                 ) : (
                   <div className="space-y-6">
@@ -186,7 +187,7 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleInputChange}
                           placeholder="Enter your name"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all duration-200 hover:border-gray-400"
                         />
                       </div>
                       
@@ -200,7 +201,7 @@ const Contact = () => {
                           value={formData.phone}
                           onChange={handleInputChange}
                           placeholder="Enter your phone number"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all duration-200 hover:border-gray-400"
                         />
                       </div>
                     </div>
@@ -216,134 +217,138 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="Enter your email"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all duration-200 hover:border-gray-400"
                       />
                     </div>
                     
                     <div className="space-y-2">
                       <label htmlFor="subject" className="block text-sm font-bold text-gray-700">
-                        Subject *
+                        Issue Type *
                       </label>
-                      <input
+                      <select
                         id="subject"
                         name="subject"
                         value={formData.subject}
                         onChange={handleInputChange}
-                        placeholder="What is this regarding?"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                      />
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                      >
+                        <option value="">Select issue type</option>
+                        <option value="login-issues">Login & Authentication Issues</option>
+                        <option value="data-management">Data Management Problems</option>
+                        <option value="order-processing">Order Processing Errors</option>
+                        <option value="inventory-management">Inventory Management</option>
+                        <option value="reporting-issues">Reporting & Analytics</option>
+                        <option value="system-performance">System Performance</option>
+                        <option value="feature-request">Feature Request</option>
+                        <option value="other">Other Technical Issue</option>
+                      </select>
                     </div>
                     
                     <div className="space-y-2">
                       <label htmlFor="message" className="block text-sm font-bold text-gray-700">
-                        Your Message *
+                        Detailed Description *
                       </label>
                       <textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        placeholder="Write your message here..."
+                        placeholder="Please describe the issue in detail, including any error messages and steps to reproduce..."
                         rows={6}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
                       />
                     </div>
                     
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+                      className="w-full bg-gradient-to-r from-brand-red to-brand-blue hover:from-brand-red/90 hover:to-brand-blue/90 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
                     >
                       {isSubmitting ? (
                         <>
                           <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                          Sending...
+                          Submitting...
                         </>
                       ) : (
                         <>
                           <Send className="h-5 w-5 mr-2" />
-                          Send Message
+                          Submit Support Request
                         </>
                       )}
                     </button>
                   </div>
                 )}
               </div>
-              
-              <div className="mt-8 bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-gray-100 hover:shadow-2xl transition-all duration-500">
-                <h3 className="text-xl md:text-2xl font-bold mb-4 text-gray-800">
-                  Direct Ordering
-                </h3>
-                <p className="text-gray-700 mb-6 leading-relaxed">
-                  For the fastest service, call us directly to place your order. 
-                  Our team is ready to assist with product information, pricing, and delivery details.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="tel:+919868220018"
-                    className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center"
-                  >
-                    <PhoneCall className="h-5 w-5 mr-2" />
-                    Call to Order
-                  </a>
-                  <Link 
-                    to="/products"
-                    className="flex-1 border-2 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center"
-                  >
-                    <Users className="h-5 w-5 mr-2" />
-                    View Products
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-br from-red-50 to-yellow-100">
+      {/* FAQ Section - Updated for Admin Application */}
+      <section className="py-12 md:py-20 bg-gradient-to-br from-slate-100 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
-              Frequently Asked Questions
+              Admin System FAQs
             </h2>
             <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Find answers to common questions about our products and services
+              Common questions about SCR Admin management system
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {[
               {
-                question: "How can I place an order?",
-                answer: "You can place an order by calling us directly at the phone numbers listed above. We'll be happy to assist you with your order and answer any questions."
+                icon: <UserCog className="h-6 w-6" />,
+                question: "How do I reset my admin password?",
+                answer: "Use the 'Forgot Password' feature on the login page. If you're still having issues, contact technical support for immediate assistance."
               },
               {
-                question: "Do you offer home delivery?",
-                answer: "Yes, we offer home delivery services. Orders placed before 4 PM will be delivered the next day."
+                icon: <Shield className="h-6 w-6" />,
+                question: "What should I do if I see 'Access Denied'?",
+                answer: "This usually means your account permissions need updating. Contact the system administrator to verify your role and access levels."
               },
               {
-                question: "What areas do you deliver to?",
-                answer: "We currently deliver to most areas within Annamaya District. Please call us to confirm if we deliver to your location."
+                icon: <Server className="h-6 w-6" />,
+                question: "The system is running slow. What can I do?",
+                answer: "First, try refreshing the page and clearing your browser cache. If the issue persists, check the system status page or contact support for performance issues."
               },
               {
-                question: "Can I visit your farm?",
-                answer: "Yes, we welcome visitors who want to learn about our farm and traditional dairy methods. Please call ahead to schedule your visit."
+                icon: <Key className="h-6 w-6" />,
+                question: "How do I manage user permissions?",
+                answer: "User permissions can be managed through the Admin Settings panel. Only users with 'Super Admin' privileges can modify user roles and permissions."
               },
               {
-                question: "How long do your products stay fresh?",
-                answer: "Our milk products should be consumed within 1-2 days of delivery for optimal freshness. Ghee has a much longer shelf life of several months when stored properly."
+                icon: <HelpCircle className="h-6 w-6" />,
+                question: "Can I export data from the system?",
+                answer: "Yes, most data can be exported in CSV format. Use the export features available in the Analytics and Reports sections. For bulk exports, contact support."
               },
               {
-                question: "Do you offer bulk discounts?",
-                answer: "Yes, we offer special pricing for bulk orders. Please contact us directly to discuss your requirements."
+                icon: <CheckCircle className="h-6 w-6" />,
+                question: "How often is the data backed up?",
+                answer: "System data is automatically backed up daily. All critical data is secured with multiple redundancy measures to prevent data loss."
+              },
+              {
+                icon: <Users className="h-6 w-6" />,
+                question: "Can multiple admins use the system simultaneously?",
+                answer: "Yes, multiple admin users can access the system concurrently. However, be cautious when multiple users are editing the same data to avoid conflicts."
+              },
+              {
+                icon: <Clock className="h-6 w-6" />,
+                question: "What's the process for system updates?",
+                answer: "System updates are typically performed during off-peak hours. You'll receive advance notice for scheduled maintenance. Most updates require no action from users."
               }
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                <h3 className="font-bold text-lg mb-3 text-gray-800 group-hover:text-orange-600 transition-colors duration-200">
-                  {faq.question}
-                </h3>
-                <p className="text-gray-700 leading-relaxed">
+                <div className="flex items-center mb-3">
+                  <div className="text-brand-red group-hover:text-brand-blue transition-colors duration-200 mr-3">
+                    {faq.icon}
+                  </div>
+                  <h3 className="font-bold text-lg text-gray-800 group-hover:text-brand-red transition-colors duration-200">
+                    {faq.question}
+                  </h3>
+                </div>
+                <p className="text-gray-700 leading-relaxed ml-9">
                   {faq.answer}
                 </p>
               </div>

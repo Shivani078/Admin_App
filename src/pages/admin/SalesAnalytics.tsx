@@ -1,3 +1,5 @@
+import { supabase } from '@/integrations/supabase/client';
+import { useQuery } from '@tanstack/react-query';
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import { format } from 'date-fns';
 import React from 'react';
@@ -90,7 +92,8 @@ const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({ orders }) => {
         label: 'Monthly Sales',
         data: salesData.data,
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
+        borderColor: 'rgb(239, 68, 68)',
+        backgroundColor: 'rgba(239, 68, 68, 0.1)',
         tension: 0.1,
       },
     ],
@@ -110,115 +113,225 @@ const SalesAnalytics: React.FC<SalesAnalyticsProps> = ({ orders }) => {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      {/* Sales Overview */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-md transition duration-300">
-        <h3 className="text-lg font-semibold mb-4">Sales Overview</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <div className="p-3 sm:p-4 rounded-lg bg-blue-100 border border-blue-300 hover:bg-blue-200 transition">
-            <h4 className="text-sm font-medium text-blue-600">Total Orders</h4>
-            <p className="text-xl sm:text-2xl font-bold">{orderStats.totalOrders}</p>
-          </div>
-          <div className="p-3 sm:p-4 bg-green-100 border border-green-300 rounded-lg hover:bg-green-200 transition">
-            <h4 className="text-sm font-medium text-green-600">Total Revenue</h4>
-            <p className="text-xl sm:text-2xl font-bold">₹{orderStats.totalRevenue.toFixed(2)}</p>
-          </div>
-          <div className="p-3 sm:p-4 bg-purple-100 border border-purple-300 rounded-lg hover:bg-purple-200 transition sm:col-span-2 lg:col-span-1">
-            <h4 className="text-sm font-medium text-purple-600">Average Order Value</h4>
-            <p className="text-xl sm:text-2xl font-bold">₹{orderStats.averageOrderValue.toFixed(2)}</p>
-          </div>
-        </div>
-      </div>
-      
-      {/* Sales Trend */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-md transition duration-300">
-        <h3 className="text-lg font-semibold mb-4">Sales Trend</h3>
-        <div className="h-[250px] sm:h-[300px] lg:h-[400px] overflow-hidden">
-          <Line data={lineChartData} options={lineChartOptions} />
-        </div>
-      </div>
-      
-      {/* Order Status Distribution */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-md transition duration-300">
-        <h3 className="text-lg font-semibold mb-4">Order Status Distribution</h3>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 border border-blue-300 rounded-lg">
-          {Object.entries(orderStats.statusCounts).map(([status, count]) => (
-            <div
-              key={status} 
-              className="p-3 sm:p-4 bg-gray-50 rounded-lg hover:bg-gray-100 hover:scale-[1.02] transition transform duration-200 ease-in-out"
-            >
-              <h4 className="text-sm font-medium text-gray-600 capitalize">{status} payment</h4>
-              <p className="text-lg sm:text-xl font-bold">{count}</p> 
+    <main className="pt-20 bg-slate-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        
+        {/* Header Section */}
+        <header className="mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Sales Analytics</h1>
+              <p className="text-slate-600 mt-2 text-sm sm:text-base">
+                Comprehensive overview of your store performance and sales trends
+              </p>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </header>
 
-      {/* Additional Analytics Section */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-md transition duration-300">
-        <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <div className="text-center p-3 bg-indigo-50 rounded-lg border border-indigo-200">
-            <div className="text-2xl font-bold text-indigo-600">{orders.filter(o => o.status === 'completed').length}</div>
-            <div className="text-sm text-indigo-600">Completed Orders</div>
-          </div>
-          <div className="text-center p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-            <div className="text-2xl font-bold text-yellow-600">{orders.filter(o => o.status === 'pending').length}</div>
-            <div className="text-sm text-yellow-600">Pending Orders</div>
-          </div>
-          <div className="text-center p-3 bg-red-50 rounded-lg border border-red-200">
-            <div className="text-2xl font-bold text-red-600">{orders.filter(o => o.status === 'cancelled').length}</div>
-            <div className="text-sm text-red-600">Cancelled Orders</div>
-          </div>
-          <div className="text-center p-3 bg-gray-50 rounded-lg border border-gray-200">
-            <div className="text-2xl font-bold text-gray-600">
-              {orders.length > 0 ? Math.round((orders.filter(o => o.status === 'completed').length / orders.length) * 100) : 0}%
-            </div>
-            <div className="text-sm text-gray-600">Success Rate</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-md transition duration-300">
-        <h3 className="text-lg font-semibold mb-4">Recent Orders</h3>
-        <div className="space-y-2">
-          {orders.slice(0, 5).map((order) => (
-            <div key={order.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-              <div className="flex-1">
-                <div className="font-medium text-sm">
-                  Order #{order.order_number || order.id.slice(0, 8)}
-                </div>
-                <div className="text-xs text-gray-500">
-                  {order.profiles?.name || order.customer_name || 'Unknown Customer'}
-                </div>
-                <div className="text-xs text-gray-400">
-                  {format(new Date(order.created_at), 'MMM dd, yyyy HH:mm')}
-                </div>
+        {/* Sales Overview Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-sm text-slate-500 font-medium mb-1">Total Orders</div>
+                <div className="text-3xl font-bold text-slate-900">{orderStats.totalOrders}</div>
               </div>
-              <div className="text-right">
-                <div className="font-semibold">₹{order.total?.toFixed(2) || '0.00'}</div>
-                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
-                  order.status === 'completed' ? 'bg-green-100 text-green-800' :
-                  order.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                  order.status === 'cancelled' ? 'bg-red-100 text-red-800' :
-                  'bg-gray-100 text-gray-800'
-                }`}>
-                  {order.status}
-                </span>
+              <div className="bg-blue-100 p-3 rounded-full">
+                <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
               </div>
             </div>
-          ))}
-        </div>
-        {orders.length === 0 && (
-          <div className="text-center py-8 text-gray-500">
-            No orders found to display analytics.
           </div>
-        )}
+
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-sm text-slate-500 font-medium mb-1">Total Revenue</div>
+                <div className="text-3xl font-bold text-slate-900">₹{orderStats.totalRevenue.toLocaleString()}</div>
+              </div>
+              <div className="bg-green-100 p-3 rounded-full">
+                <svg className="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-sm text-slate-500 font-medium mb-1">Average Order Value</div>
+                <div className="text-3xl font-bold text-slate-900">₹{orderStats.averageOrderValue.toFixed(2)}</div>
+              </div>
+              <div className="bg-purple-100 p-3 rounded-full">
+                <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sales Trend Section */}
+        <section className="mb-8">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+            <h2 className="text-xl font-semibold text-slate-900 mb-6">Sales Trend</h2>
+            <div className="h-[300px]">
+              <Line data={lineChartData} options={lineChartOptions} />
+            </div>
+          </div>
+        </section>
+
+        {/* Order Status Distribution */}
+        <section className="mb-8">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+            <h3 className="text-xl font-semibold text-slate-900 mb-6">Order Status Distribution</h3>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {Object.entries(orderStats.statusCounts).map(([status, count]) => (
+                <div
+                  key={status} 
+                  className="p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors border border-slate-200"
+                >
+                  <h4 className="text-sm font-medium text-slate-700 capitalize mb-2">{status}</h4>
+                  <p className="text-2xl font-bold text-slate-900">{count}</p> 
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Recent Orders */}
+        <section className="mb-8">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-md transition-shadow">
+            <h3 className="text-xl font-semibold text-slate-900 mb-6">Recent Orders</h3>
+            <div className="space-y-3">
+              {orders.slice(0, 5).map((order) => (
+                <div key={order.id} className="flex justify-between items-center p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors border border-slate-200">
+                  <div className="flex-1">
+                    <div className="font-medium text-slate-900">
+                      Order #{order.order_number || order.id.slice(0, 8)}
+                    </div>
+                    <div className="text-sm text-slate-600 mt-1">
+                      {order.profiles?.name || order.customer_name || 'Unknown Customer'}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      {format(new Date(order.created_at), 'MMM dd, yyyy HH:mm')}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-slate-900">₹{order.total?.toFixed(2) || '0.00'}</div>
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-1 ${
+                      order.status === 'completed' || order.status === 'delivered' ? 'bg-green-100 text-green-800 border border-green-200' :
+                      order.status === 'pending' || order.status === 'processing' ? 'bg-yellow-100 text-yellow-800 border border-yellow-200' :
+                      order.status === 'cancelled' ? 'bg-red-100 text-red-800 border border-red-200' :
+                      'bg-slate-100 text-slate-800 border border-slate-200'
+                    }`}>
+                      {order.status}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {orders.length === 0 && (
+              <div className="text-center py-12 text-slate-500 bg-slate-50 rounded-lg border border-slate-200">
+                <div className="text-lg font-medium mb-2">No orders found</div>
+                <div className="text-sm">Start selling to see analytics data</div>
+              </div>
+            )}
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 
-export default SalesAnalytics;
+// AnalyticsTab component that fetches data and renders SalesAnalytics
+const AnalyticsTab: React.FC = () => {
+  const { data: orders = [], isLoading: ordersLoading, error: ordersError } = useQuery<Order[]>({
+    queryKey: ['admin-orders-analytics'],
+    queryFn: async () => {
+      const { data: ordersData, error: ordersError } = await supabase
+        .from('orders')
+        .select('*')
+        .order('created_at', { ascending: false });
 
+      if (ordersError) throw ordersError;
+
+      const userIds = [...new Set(ordersData.map(order => order.user_id))];
+      const { data: profilesData } = await supabase
+        .from('profiles')
+        .select('id, name, email')
+        .in('id', userIds);
+
+      const ordersWithProfiles = ordersData.map(order => ({
+        ...order,
+        profiles: profilesData?.find(profile => profile.id === order.user_id)
+      }));
+
+      const ordersWithItems = await Promise.all(
+        (ordersWithProfiles || []).map(async (order) => {
+          const { data: itemsData, error: itemsError } = await supabase
+            .from('order_items')
+            .select(`
+              *,
+              products (
+                title, price, image
+              )
+            `)
+            .eq('order_id', order.id);
+
+          return {
+            ...order,
+            order_items: itemsData || []
+          };
+        })
+      );
+
+      return ordersWithItems as Order[];
+    },
+    retry: 3,
+    retryDelay: 1000,
+  });
+
+  if (ordersLoading) {
+    return (
+      <div className="pt-20 bg-slate-50 min-h-screen">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+            <div className="text-center py-12">
+              <div className="inline-flex items-center px-6 py-3 font-semibold leading-6 text-sm shadow rounded-lg text-blue-600 bg-blue-50 border border-blue-200 transition ease-in-out duration-150">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Loading analytics data...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (ordersError) {
+    return (
+      <div className="pt-20 bg-slate-50 min-h-screen">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+            <div className="text-center py-12">
+              <div className="text-red-700 bg-red-50 border border-red-200 rounded-lg p-6 inline-block max-w-md">
+                <div className="font-semibold mb-2">Error loading analytics</div>
+                <div className="text-sm text-red-600">{ordersError.message}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return <SalesAnalytics orders={orders} />;
+};
+
+export default AnalyticsTab;

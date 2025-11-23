@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -46,11 +45,15 @@ const Navbar = () => {
     navigate('/');
   };
 
-  const menuItems = [
+  const publicMenuItems = [
     { title: 'Home', path: '/' },
-    { title: 'Products', path: '/products' },
     { title: 'About', path: '/about' },
     { title: 'Contact', path: '/contact' },
+  ];
+
+  const adminMenuItems = [
+    { title: 'Stock', path: '/admin/products' },
+    { title: 'Order History', path: '/admin/orders' },
   ];
 
   return (
@@ -72,22 +75,27 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-            {menuItems.map((item) => {
-              const to = item.path === '/products' ? (isAdmin ? '/admin/products' : '/products') : item.path;
-              return (
-                <Link 
-                  key={item.title}
-                  to={to}
-                  className="px-3 py-2 text-sm font-medium transition-colors rounded-md hover:bg-brand-cream hover:text-brand-red"
-                >
-                  {item.title}
-                </Link>
-              );
-            })}
+            {/* Public menu items - always visible */}
+            {publicMenuItems.map((item) => (
+              <Link 
+                key={item.title}
+                to={item.path}
+                className="px-3 py-2 text-sm font-medium transition-colors rounded-md hover:bg-brand-cream hover:text-brand-red"
+              >
+                {item.title}
+              </Link>
+            ))}
 
-            <Link to={isAdmin ? "/admin/orders" : "/orders"} className="px-3 py-2 text-sm font-medium transition-colors rounded-md hover:bg-brand-cream hover:text-brand-red">
-              Orders
-            </Link>
+            {/* Admin-only menu items - only visible when user is logged in and is admin */}
+            {user && isAdmin && adminMenuItems.map((item) => (
+              <Link 
+                key={item.title}
+                to={item.path}
+                className="px-3 py-2 text-sm font-medium transition-colors rounded-md hover:bg-brand-cream hover:text-brand-red"
+              >
+                {item.title}
+              </Link>
+            ))}
             
             {/* Authentication */}
             {user ? (
@@ -129,7 +137,7 @@ const Navbar = () => {
                 <Button className="bg-brand-red hover:bg-brand-red/90 text-white" asChild>
                   <Link to="/auth">Sign Up</Link>
                 </Button>
-                <Link to="/auth" className="text-sm text-slate-700 hover:text-brand-red">Sign In</Link>
+                
               </div>
             )}
           </div>
@@ -149,6 +157,24 @@ const Navbar = () => {
                     <span className="text-sm truncate max-w-[150px]">{user.email}</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
+                  
+                  {/* Mobile menu items for admin */}
+                  {user && isAdmin && (
+                    <>
+                      <DropdownMenuItem asChild>
+                        <Link to="/admin/products" className="flex items-center">
+                          Stock
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link to="/admin/orders" className="flex items-center">
+                          Order History
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                    </>
+                  )}
+                  
                   {!isAdmin && (
                     <DropdownMenuItem asChild>
                       <Link to="/user-profile" className="flex items-center">
@@ -179,9 +205,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {/* Mobile menu removed in favor of compact auth/profile actions */}
     </nav>
   );
 };

@@ -24,6 +24,8 @@ import UserProfile from "./pages/UserProfile.tsx";
 import BottomNavbar from "./components/BottomNavbar";
 import LandingPage from "./pages/LandingPage";
 import HomeRouter from "./pages/HomeRouter";
+import AnalyticsTab from "./pages/admin/AnalyticsTab";
+import AlertsPage from "./pages/admin/Alerts"; // Make sure this import is correct
 
 const queryClient = new QueryClient();
 
@@ -39,24 +41,34 @@ const AppContent = () => {
             <Navbar />
             <AnimatePresence mode="wait">
               <Routes>
-                
-                
+                {/* Public routes */}
+                <Route path="/" element={<HomeRouter />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/auth" element={<Auth />} />
-               <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
+                
+                {/* Protected user routes */}
+                <Route path="/user-profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+                
+                {/* Admin-only routes */}
                 <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
+                
                 <Route path="/admin/products" element={<ProtectedRoute adminOnly><ProductsTab /></ProtectedRoute>} />
                 <Route path="/admin/orders" element={<ProtectedRoute adminOnly><OrdersTab /></ProtectedRoute>} />
-                 <Route path="/user-profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-                 <Route path="/" element={<HomeRouter />} />
-
+                <Route path="/admin/analytics" element={<ProtectedRoute adminOnly><AnalyticsTab /></ProtectedRoute>} />
+                
+                {/* Add the alerts route - make sure the path matches exactly */}
+                <Route path="/admin/alerts" element={<ProtectedRoute adminOnly><AlertsPage /></ProtectedRoute>} />
+                
+                {/* Removed public /products and /orders routes since they should only be accessible to admins */}
+                
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AnimatePresence>
-            <BottomNavbar /> {/*  fixed bottom navbar */}
+            <BottomNavbar /> {/* fixed bottom navbar */}
             <Footer />
           </BrowserRouter>
         </TooltipProvider>

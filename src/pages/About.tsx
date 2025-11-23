@@ -1,9 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Award, Heart, Leaf, Users, Shield, Cpu, Database, Smartphone, Zap } from 'lucide-react';
+import { Award, Heart, Leaf, Users, Shield, Cpu, Database, Smartphone, Zap, BarChart3, Settings, Package, ShoppingCart, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import farm from '../../public/farm.png';
-import sahiwal from '../../public/sahiwal.png';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const About = () => {
@@ -20,7 +18,7 @@ const About = () => {
     >
       {/* Header Section */}
       <section className="py-12 bg-brand-blue/10">
-        <div className="section-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
               About SCR Admin
@@ -35,7 +33,7 @@ const About = () => {
 
       {/* What We Do */}
       <section className="py-16">
-        <div className="section-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -52,31 +50,31 @@ const About = () => {
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <div className="bg-green-100 p-1 rounded-full mt-1">
-                    <Leaf className="h-4 w-4 text-green-600" />
+                    <Package className="h-4 w-4 text-green-600" />
                   </div>
                   <p className="text-gray-700">Manage products and inventory</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="bg-green-100 p-1 rounded-full mt-1">
-                    <Leaf className="h-4 w-4 text-green-600" />
+                    <ShoppingCart className="h-4 w-4 text-green-600" />
                   </div>
                   <p className="text-gray-700">Track and update orders</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="bg-green-100 p-1 rounded-full mt-1">
-                    <Leaf className="h-4 w-4 text-green-600" />
+                    <Users className="h-4 w-4 text-green-600" />
                   </div>
                   <p className="text-gray-700">View and manage user accounts</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="bg-green-100 p-1 rounded-full mt-1">
-                    <Leaf className="h-4 w-4 text-green-600" />
+                    <BarChart3 className="h-4 w-4 text-green-600" />
                   </div>
                   <p className="text-gray-700">Handle internal workflows with ease</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="bg-green-100 p-1 rounded-full mt-1">
-                    <Leaf className="h-4 w-4 text-green-600" />
+                    <Lock className="h-4 w-4 text-green-600" />
                   </div>
                   <p className="text-gray-700">Maintain data securely through Supabase integration</p>
                 </div>
@@ -93,14 +91,35 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <Cpu className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 italic">Admin Dashboard Interface</p>
+              <div className="bg-gradient-to-br from-brand-blue/20 to-brand-red/20 rounded-2xl p-8 border border-gray-200">
+                <div className="text-center">
+                  <Cpu className="h-16 w-16 text-brand-red mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Admin Dashboard Interface</h3>
+                  <p className="text-gray-600 mb-6">
+                    Modern, intuitive design built for efficiency and productivity
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <BarChart3 className="h-6 w-6 text-brand-blue mx-auto mb-1" />
+                      <span className="text-xs font-medium">Analytics</span>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <Package className="h-6 w-6 text-brand-blue mx-auto mb-1" />
+                      <span className="text-xs font-medium">Products</span>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <ShoppingCart className="h-6 w-6 text-brand-blue mx-auto mb-1" />
+                      <span className="text-xs font-medium">Orders</span>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <Users className="h-6 w-6 text-brand-blue mx-auto mb-1" />
+                      <span className="text-xs font-medium">Users</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="absolute -bottom-6 -right-6 glass-panel p-4 rounded-xl shadow-lg max-w-xs">
-                <p className="text-sm italic">
+              <div className="absolute -bottom-6 -right-6 bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-xs border border-gray-200">
+                <p className="text-sm italic text-gray-700">
                   "Our commitment to efficiency begins with intuitive design and extends to every feature we build."
                 </p>
               </div>
@@ -110,8 +129,8 @@ const About = () => {
       </section>
 
       {/* Our Values */}
-      <section className="py-16 bg-brand-cream">
-        <div className="section-container">
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
               Who Can Use It
@@ -123,7 +142,7 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <motion.div 
-              className="glass-panel p-6 text-center"
+              className="bg-white p-6 text-center rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -139,7 +158,7 @@ const About = () => {
             </motion.div>
 
             <motion.div 
-              className="glass-panel p-6 text-center"
+              className="bg-white p-6 text-center rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -155,7 +174,7 @@ const About = () => {
             </motion.div>
 
             <motion.div 
-              className="glass-panel p-6 text-center"
+              className="bg-white p-6 text-center rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -171,22 +190,46 @@ const About = () => {
             </motion.div>
           </div>
           <div className="text-center mt-8">
-            <p className="text-gray-700 font-semibold">
-              Unauthorized users cannot access dashboard features.
-            </p>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 inline-block">
+              <p className="text-gray-700 font-semibold flex items-center justify-center">
+                <Lock className="h-4 w-4 mr-2 text-yellow-600" />
+                Unauthorized users cannot access dashboard features.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Technology Stack */}
       <section className="py-16">
-        <div className="section-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <div className="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden bg-gray-200 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <Database className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 italic">Technology Infrastructure</p>
+              <div className="bg-gradient-to-br from-slate-100 to-blue-50 rounded-2xl p-8 border border-gray-200">
+                <div className="text-center">
+                  <Database className="h-16 w-16 text-brand-blue mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">Technology Infrastructure</h3>
+                  <p className="text-gray-600 mb-6">
+                    Built with modern, scalable technologies for reliability and performance
+                  </p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <div className="text-xs font-bold text-brand-blue">React</div>
+                      <div className="text-xs text-gray-500">Frontend</div>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <div className="text-xs font-bold text-brand-blue">Supabase</div>
+                      <div className="text-xs text-gray-500">Backend</div>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <div className="text-xs font-bold text-brand-blue">TypeScript</div>
+                      <div className="text-xs text-gray-500">Language</div>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 text-center shadow-sm">
+                      <div className="text-xs font-bold text-brand-blue">Tailwind</div>
+                      <div className="text-xs text-gray-500">Styling</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -217,9 +260,9 @@ const About = () => {
                   <p className="text-gray-700"><strong>Tailwind CSS</strong> - Utility-first CSS framework</p>
                 </div>
               </div>
-              <div className="mt-8 p-4 bg-brand-blue/10 rounded-lg">
-                <h3 className="font-semibold mb-2">Version</h3>
-                <p className="text-gray-700">SCR Admin v1.0.0</p>
+              <div className="mt-8 p-4 bg-brand-blue/10 rounded-lg border border-brand-blue/20">
+                <h3 className="font-semibold mb-2 text-gray-800">Version</h3>
+                <p className="text-gray-700 font-mono">SCR Admin v1.0.0</p>
               </div>
             </div>
           </div>
@@ -228,7 +271,7 @@ const About = () => {
 
       {/* Our Mission */}
       <section className="py-16 bg-brand-blue/10">
-        <div className="section-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl font-display font-bold mb-6">
               Our Mission
@@ -236,9 +279,9 @@ const About = () => {
             <p className="text-lg text-gray-700 mb-8">
               To simplify backend operations and give teams a reliable, fast, and modern tool to manage their business efficiently.
             </p>
-            <div className="glass-panel p-6 max-w-2xl mx-auto">
-              <h3 className="font-semibold mb-4">Get Started</h3>
-              <p className="mb-4">
+            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-gray-200 max-w-2xl mx-auto">
+              <h3 className="font-semibold mb-4 text-gray-800">Get Started</h3>
+              <p className="mb-4 text-gray-700">
                 Ready to streamline your operations? Access the admin dashboard to start managing your business more efficiently.
               </p>
               <Link to="/auth">
