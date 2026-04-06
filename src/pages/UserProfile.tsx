@@ -6,6 +6,29 @@ import { supabase } from "@/integrations/supabase/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { User, Edit3, Save, X, LogOut, Mail, Phone, MapPin, Building } from "lucide-react";
+
+type ProfileData = {
+  id: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+  name?: string | null;
+  phone?: string | null;
+  address?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip_code?: string | null;
+  role?: string | null;
+};
+
+type ProfileForm = {
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  zip_code: string;
+};
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,7 +58,7 @@ const UserProfile: React.FC = () => {
   });
 
   // Fetch profile info
-  const { data: profile, isLoading: profileLoading } = useQuery({
+  const { data: profile, isLoading: profileLoading } = useQuery<ProfileData | null>({
     queryKey: ["profile", user?.id],
     enabled: !!user?.id,
     queryFn: async () => {
@@ -45,12 +68,12 @@ const UserProfile: React.FC = () => {
         .eq("id", user.id)
         .single();
       if (error) throw error;
-      return data;
+      return data as ProfileData;
     },
   });
 
   // Local state for editing
-  const [editData, setEditData] = useState({
+  const [editData, setEditData] = useState<ProfileForm>({
     name: "",
     phone: "",
     address: "",
@@ -76,11 +99,11 @@ const UserProfile: React.FC = () => {
   }, [profile, isEditing]);
 
   // Update profile mutation
-  const updateProfile = useMutation({
-    mutationFn: async (newData: typeof editData) => {
+  const updateProfile = useMutation<void, any, ProfileForm>({
+    mutationFn: async (newData: ProfileForm) => {
       const { error } = await supabase
         .from("profiles")
-        .update(newData)
+        .update(newData as any)
         .eq("id", user.id);
       if (error) throw error;
     },
@@ -182,7 +205,9 @@ const UserProfile: React.FC = () => {
                     </div>
                     <div className="min-w-0">
                       <h2 className="text-lg font-semibold text-slate-800 truncate">Profile Information</h2>
-                      <p className="text-slate-500 text-xs sm:text-sm">Keep your details up to date</p>
+                      <p className="text-slate-500 text-xs sm:text-sm">
+                        {profile?.name ? `Name: ${profile.name}` : 'No name set yet. Please enter your full name.'}
+                      </p>
                     </div>
                   </div>
                   {!isEditing && (
